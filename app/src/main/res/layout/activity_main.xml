@@ -111,8 +111,23 @@
                         android:textColor="@color/black"
                         android:layout_weight="0.5"/>
                 </LinearLayout>
+                <Button
+                    android:id="@+id/login_page_facebook_login_button_when_signup_mode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/white"
+                    android:text="Continue as Facebook"
+                    android:backgroundTint="@color/facebook_color"
+                    android:textAllCaps="false"
+                    android:background="@drawable/box_border"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone"/>
 
                 <LinearLayout
+                    android:id="@+id/login_page_line"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -138,20 +153,7 @@
                         android:layout_weight="0.5"/>
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/login_page_facebook_login_button_when_signup_mode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:textColor="@color/white"
-                    android:text="Continue as Facebook"
-                    android:backgroundTint="@color/facebook_color"
-                    android:background="@drawable/box_border"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:visibility="gone"/>
+
 
                 <Button
                     android:id="@+id/login_page_facebook_login_button_when_signIn_mode"
@@ -166,6 +168,16 @@
                     android:backgroundTint="@color/facebook_color"
                     android:background="@drawable/box_border"
                     />
+                <TextView
+                    android:id="@+id/login_page_signup_with_email_phoneNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이메일 주소 또는 전화번호로 가입하기"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:textColor="@color/facebook_color"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <LinearLayout
@@ -186,6 +198,7 @@
                     android:layout_margin="10dp"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/login_page_signup_inquire_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="계정이 없으신가요?"
@@ -198,6 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:text="가입하기."
+                        android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_weight="0.5"/>
                 </LinearLayout>
