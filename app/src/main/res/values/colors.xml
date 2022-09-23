@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="facebook_color">#1876F0</color>
     <color name="border_color">#BDBDBD</color>
+    <color name="edittext_color">#EAEAEA</color>
+
 </resources>
