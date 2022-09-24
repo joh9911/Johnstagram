@@ -9,9 +9,11 @@ import android.view.View
 import com.example.johnstagram.databinding.ActivityMainBinding
 import kotlin.reflect.typeOf
 
+interface DataFromFragment {
+    fun replaceFragmentToSignupFragment()
+}
 
-
-class MainActivity : AppCompatActivity(), LoginFragment.ReplaceLoginFragmentToSignupFragment {
+class MainActivity : AppCompatActivity(),DataFromFragment {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +28,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.ReplaceLoginFragmentToSi
     }
 
 
-
-    override fun replaceFragment(){
+    override fun replaceFragmentToSignupFragment(){
         val fragment = SignUpFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_page_frame_layout, fragment).commit()
     }

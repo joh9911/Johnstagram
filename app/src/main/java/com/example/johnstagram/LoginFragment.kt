@@ -15,11 +15,6 @@ class LoginFragment: Fragment() {
     private var myBinding: LoginFragmentBinding? = null
     private val binding get() = myBinding!!
 
-    lateinit var replaceLoginFragmentToSignupFragment: ReplaceLoginFragmentToSignupFragment
-
-    interface ReplaceLoginFragmentToSignupFragment{
-        fun replaceFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,11 +28,7 @@ class LoginFragment: Fragment() {
         signUpWithEmailAndPhoneNumberBtnEvent()
         return view
     }
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        replaceLoginFragmentToSignupFragment = activity as ReplaceLoginFragmentToSignupFragment
 
-    }
     fun signUpEvent(){
         var tag = 0
         binding.loginPageSignupText.setOnClickListener {
@@ -49,6 +40,7 @@ class LoginFragment: Fragment() {
                 binding.loginPageFacebookLoginButtonWhenSignInMode.visibility = View.GONE
                 binding.loginPageFacebookLoginButtonWhenSignupMode.visibility = View.VISIBLE
                 binding.loginPageSignupWithEmailPhoneNum.visibility = View.VISIBLE
+                binding.loginPagePasswordIcon.visibility = View.INVISIBLE
                 binding.loginPageSignupInquireText.text = resources.getString(R.string.account_already_have)
                 binding.loginPageSignupText.text = resources.getString(R.string.account_already_have_login)
                 binding.loginPageSignupText.setTypeface(null, Typeface.BOLD)
@@ -59,6 +51,7 @@ class LoginFragment: Fragment() {
                 binding.loginPagePwEdittext.visibility = View.VISIBLE
                 binding.loginPageLoginButton.visibility = View.VISIBLE
                 binding.loginPageFindLoginInfoLinearLayout.visibility = View.VISIBLE
+                binding.loginPagePasswordIcon.visibility = View.VISIBLE
                 binding.loginPageFacebookLoginButtonWhenSignInMode.visibility = View.VISIBLE
                 binding.loginPageFacebookLoginButtonWhenSignupMode.visibility = View.GONE
                 binding.loginPageSignupWithEmailPhoneNum.visibility = View.GONE
@@ -69,9 +62,17 @@ class LoginFragment: Fragment() {
             }
         }
     }
+    fun passwordIconEvent(){
+        binding.loginPagePasswordIcon.setOnClickListener {
+            binding.loginPagePwEdittext.hin
+        }
+    }
 
     fun signUpWithEmailAndPhoneNumberBtnEvent(){
-        replaceLoginFragmentToSignupFragment.replaceFragment()
+        binding.loginPageSignupWithEmailPhoneNum.setOnClickListener {
+            val dataInterface = context as DataFromFragment
+            dataInterface.replaceFragmentToSignupFragment()
+        }
     }
 
     override fun onDestroy() {

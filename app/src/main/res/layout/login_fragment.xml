@@ -81,16 +81,17 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.4"
                     android:layout_marginTop="15dp">
+
                     <EditText
                         android:id="@+id/login_page_pw_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_box_border"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:singleLine="true"
-                        android:textColorHint="@color/border_color"
                         android:padding="10dp"
-                        android:background="@drawable/edittext_box_border"/>
+                        android:singleLine="true"
+                        android:textColorHint="@color/border_color" />
                     <Button
                         android:id="@+id/login_page_password_icon"
                         android:layout_width="30dip"

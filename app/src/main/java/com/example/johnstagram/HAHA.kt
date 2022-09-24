@@ -5,19 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.johnstagram.databinding.SignupFragmentBinding
+import com.example.johnstagram.databinding.LoginFragmentBinding
 
-class SignUpFragment: Fragment() {
-    private var myBinding: SignupFragmentBinding? = null
-    private val binding get() = myBinding!!
-
+class HAHA: Fragment() {
+    private var binding:LoginFragmentBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        myBinding = SignupFragmentBinding.inflate(inflater,container,false)
-        val view = binding.root
-        return view
+        val view = LoginFragmentBinding.inflate(inflater,container,false)
+        return view.root
     }
 }
