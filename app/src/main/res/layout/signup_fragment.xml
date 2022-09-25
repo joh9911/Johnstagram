@@ -16,19 +16,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/sign_up_page_bottom_linearLayout"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                app:layout_constraintVertical_bias="0.25">
+                app:layout_constraintVertical_bias="0.5">
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="150dp"
                     android:src="@mipmap/sign_up_user_icon"
                     />
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/sign_up_page_tab_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:tabBackground="@drawable/tab_underline">
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -45,21 +46,36 @@
                         />
 
                 </com.google.android.material.tabs.TabLayout>
+                <EditText
+                    android:id="@+id/sign_up_email_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/email"
+                    android:singleLine="true"
+                    android:textColorHint="@color/border_color"
+                    android:padding="10dp"
+                    android:background="@drawable/edittext_box_border"
+                    />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.4"
                     android:layout_marginTop="20dp">
+
                     <EditText
                         android:id="@+id/sign_up_phone_number_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_box_border"
+                        android:inputType="numberDecimal"
                         android:hint="@string/phone_number"
+                        android:padding="10dp"
                         android:singleLine="true"
                         android:textColorHint="@color/border_color"
-                        android:padding="10dp"
-                        android:background="@drawable/edittext_box_border"/>
+                        />
 
                     <Button
                         android:id="@+id/sign_up_page_clear_button"
@@ -72,25 +88,14 @@
                         android:background="@drawable/ic_baseline_clear_24" />
                 </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/sign_up_email_edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.4"
-                    android:layout_marginTop="20dp"
-                    android:hint="@string/email"
-                    android:singleLine="true"
-                    android:textColorHint="@color/border_color"
-                    android:padding="10dp"
-                    android:background="@drawable/edittext_box_border"/>
-
                 <TextView
                     android:id="@+id/sign_up_phone_number_detail_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:gravity="center"
-                    android:text="@string/phone_number_detail"/>
+                    android:text="@string/phone_number_detail"
+                    />
 
                 <Button
                     android:id="@+id/login_page_login_button"

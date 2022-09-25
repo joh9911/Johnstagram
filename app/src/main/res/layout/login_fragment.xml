@@ -92,6 +92,7 @@
                         android:padding="10dp"
                         android:singleLine="true"
                         android:textColorHint="@color/border_color" />
+
                     <Button
                         android:id="@+id/login_page_password_icon"
                         android:layout_width="30dip"
@@ -99,7 +100,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="5dip"
-                        android:background="@mipmap/hide_password"/>
+                        android:background="@mipmap/hide_password" />
                 </RelativeLayout>
 
 

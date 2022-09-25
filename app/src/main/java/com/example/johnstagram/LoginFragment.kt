@@ -3,6 +3,9 @@ package com.example.johnstagram
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +26,12 @@ class LoginFragment: Fragment() {
     ): View? {
         myBinding = LoginFragmentBinding.inflate(inflater,container,false)
         val view = binding.root
-        Log.d("로그인 ","프레그먼트")
         signUpEvent()
         signUpWithEmailAndPhoneNumberBtnEvent()
+        passwordIconEvent()
         return view
     }
+
 
     fun signUpEvent(){
         var tag = 0
@@ -62,16 +66,34 @@ class LoginFragment: Fragment() {
             }
         }
     }
+
     fun passwordIconEvent(){
+        var tag = 0
         binding.loginPagePasswordIcon.setOnClickListener {
-            binding.loginPagePwEdittext.hin
+            if (tag == 0){
+                binding.loginPagePwEdittext.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.loginPagePwEdittext.setSelection(binding.loginPagePwEdittext.length())
+                binding.loginPagePasswordIcon.setBackgroundResource(R.mipmap.show_password)
+                Log.d("비밀번호","품")
+                tag += 1
+            }
+            else{
+                binding.loginPagePwEdittext.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.loginPagePwEdittext.setSelection(binding.loginPagePwEdittext.length())
+                binding.loginPagePasswordIcon.setBackgroundResource(R.mipmap.hide_password)
+                tag -= 1
+                Log.d("비밀번호","잠금")
+
+            }
         }
     }
 
     fun signUpWithEmailAndPhoneNumberBtnEvent(){
         binding.loginPageSignupWithEmailPhoneNum.setOnClickListener {
-            val dataInterface = context as DataFromFragment
+            val dataInterface = context as ReplaceFragmentToSignupFragment
             dataInterface.replaceFragmentToSignupFragment()
+            binding.loginPageIdEdittext.text.clear()
+            binding.loginPagePwEdittext.text.clear()
         }
     }
 
