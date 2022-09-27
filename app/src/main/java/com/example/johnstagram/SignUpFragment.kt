@@ -1,9 +1,7 @@
 package com.example.johnstagram
 
 import android.Manifest
-import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
-import android.content.Context.TELEPHONY_SERVICE
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.telephony.TelephonyManager
@@ -12,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.johnstagram.databinding.SignupFragmentBinding
 import com.google.android.material.tabs.TabLayout
@@ -34,7 +33,7 @@ class SignUpFragment: Fragment() {
     fun initEvent(){
         val imm = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         binding.signUpPhoneNumberEdittext.requestFocus()
-        binding.signUpPhoneNumberEdittext.setText(getPhoneNum(requireContext()))
+        binding.signUpPhoneNumberEdittext.setText(getPhoneNumber())
         if(binding.signUpPhoneNumberEdittext.isFocused){
             imm.showSoftInput(binding.signUpPhoneNumberEdittext, InputMethodManager.SHOW_FORCED)
         }
@@ -76,44 +75,31 @@ class SignUpFragment: Fragment() {
         }
     }
 
-    fun getPhoneNum(context: Context): String? {
-        var phoneNum = ""
-        val telManager = context.getSystemService(TELEPHONY_SERVICE) as TelephonyManager
-//        if (ActivityCompat.checkSelfPermission(
-//                context,
-//                Manifest.permission.READ_SMS
-//            ) != PackageManager.PERMISSION_GRANTED )
-//            return "0"
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.INTERNET
-            ) != PackageManager.PERMISSION_GRANTED )
-            return "123"
-        else if(ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.READ_PHONE_NUMBERS) != PackageManager.PERMISSION_GRANTED)
-            return "01"
-        else if(
-            ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.READ_PHONE_STATE
-            ) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return "010"
-        }
-        phoneNum = telManager.line1Number.toString()
-        if (phoneNum.startsWith("+82")) {
-            phoneNum = phoneNum.replace("+82", "0")
-        }
-        return phoneNum
-    }
+    @Throws(SecurityException::class)
+    private fun getPhoneNumber(): String? {
+        val telephonyManager = ContextCompat.getSystemService(
+            requireContext(),
+            TelephonyManager::class.java
+        )
+        return if (telephonyManager != null) {
+            if (//권한이 없다면 SecurityException를 발생시킵니다
+                ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_PHONE_NUMBERS
+                ) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_PHONE_STATE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                throw SecurityException("Permission Denial : requires android.permission.READ_PHONE_NUMBERS, android.permission.READ_PHONE_STATE")
+            } else { //권한이 있다면 getLine1Number()를 반환합니다 (null을 반환할 수 있습니다)
+                telephonyManager.line1Number
+            }
+        } else null
 
+        // SystemService 가 null이라면 null을 반환합니다
+    }
     fun phoneNumEditTextEraseButtonEvent(){
         binding.signUpPageClearButton.setOnClickListener {
             binding.signUpPhoneNumberEdittext.text.clear()
