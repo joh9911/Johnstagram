@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import com.example.johnstagram.databinding.ActivityMainBinding
 import kotlin.reflect.typeOf
 
@@ -16,8 +17,11 @@ interface ReplaceFragmentToSignupFragment {
 interface ReplaceFragmentToLoginFragment {
     fun replaceFragmentToLoginFragment()
 }
+interface ReplaceFragmentToVerifyFragment{
+    fun replaceFragmentToVerifyFragment()
+}
 
-class MainActivity : AppCompatActivity(),ReplaceFragmentToSignupFragment, ReplaceFragmentToLoginFragment {
+class MainActivity : AppCompatActivity(),ReplaceFragmentToSignupFragment, ReplaceFragmentToLoginFragment, ReplaceFragmentToVerifyFragment {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +35,32 @@ class MainActivity : AppCompatActivity(),ReplaceFragmentToSignupFragment, Replac
 
 
     override fun replaceFragmentToSignupFragment(){
+        Log.d("sign","inter")
+
         val fragment = SignUpFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_page_frame_layout, fragment).commit()
     }
 
     override fun replaceFragmentToLoginFragment() {
+        Log.d("login","inter")
+
         val fragment = LoginFragment()
         supportFragmentManager.beginTransaction().replace(R.id.main_page_frame_layout, fragment).commit()    }
+
+    override fun onStop() {
+        super.onStop()
+        Toast.makeText(this,"mainOnStop",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(this,"mainOnDestroy",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun replaceFragmentToVerifyFragment() {
+        Log.d("verify","inter")
+        val fragment = SignUpVerifyFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.main_page_frame_layout, fragment).commit()
+    }
 
 }

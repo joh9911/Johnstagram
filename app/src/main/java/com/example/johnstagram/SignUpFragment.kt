@@ -1,24 +1,39 @@
 package com.example.johnstagram
 
-import android.Manifest
+import android.Manifest.permission.*
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.Context.TELEPHONY_SERVICE
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.telephony.TelephonyManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.johnstagram.databinding.SignupFragmentBinding
 import com.google.android.material.tabs.TabLayout
+import java.lang.Math.random
+import java.util.jar.Manifest
 
 
 class SignUpFragment: Fragment() {
     private var myBinding: SignupFragmentBinding? = null
     private val binding get() = myBinding!!
+    lateinit var myPhoneNumber: String
+
+    companion object {
+        private val PERMISSIONS = arrayOf(READ_SMS, READ_PHONE_NUMBERS, READ_PHONE_STATE, SEND_SMS,
+            RECEIVE_SMS)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,16 +42,31 @@ class SignUpFragment: Fragment() {
     ): View? {
         myBinding = SignupFragmentBinding.inflate(inflater,container,false)
         val view = binding.root
+        Log.d("싸인업","하하")
+        myPhoneNumber = ""
         initEvent()
+
         return view
     }
     fun initEvent(){
+        requestPermissions(getPermissionsRequest(), PERMISSIONS)
+
+        setFocusOnEditText()
+        tabLayoutEvent()
+        returnToLoginFragmentEvent()
+        phoneNumEditTextEraseButtonEvent()
+        registerWithPhoneNumberButtonEvent()
+    }
+
+    fun setFocusOnEditText(){
         val imm = requireActivity().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         binding.signUpPhoneNumberEdittext.requestFocus()
-        binding.signUpPhoneNumberEdittext.setText(getPhoneNumber())
         if(binding.signUpPhoneNumberEdittext.isFocused){
             imm.showSoftInput(binding.signUpPhoneNumberEdittext, InputMethodManager.SHOW_FORCED)
         }
+    }
+
+    fun tabLayoutEvent(){
         binding.signUpPageTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
@@ -62,9 +92,40 @@ class SignUpFragment: Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
         })
-        returnToLoginFragmentEvent()
-        phoneNumEditTextEraseButtonEvent()
     }
+
+    fun requestPermissions(request: ActivityResultLauncher<Array<String>>, permissions: Array<String>) = request.launch(permissions)
+
+    fun isAllPermissionsGranted(permissions: Array<String>) = permissions.all {
+        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun getPermissionsRequest() = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        if (isAllPermissionsGranted(PERMISSIONS)) {             //extension function
+            binding.signUpPhoneNumberEdittext.setText(getPhoneNumber())
+        } else { }
+
+    }
+
+    fun getPhoneNumber(): String {
+        var tm = requireContext().getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+        myPhoneNumber = tm.line1Number
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                READ_SMS
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                READ_PHONE_NUMBERS
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                READ_PHONE_STATE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return ""
+        }
+    return myPhoneNumber
+    }
+
 
     fun returnToLoginFragmentEvent(){
         binding.signUpPageBottomLinearLayout.setOnClickListener {
@@ -75,34 +136,30 @@ class SignUpFragment: Fragment() {
         }
     }
 
-    @Throws(SecurityException::class)
-    private fun getPhoneNumber(): String? {
-        val telephonyManager = ContextCompat.getSystemService(
-            requireContext(),
-            TelephonyManager::class.java
-        )
-        return if (telephonyManager != null) {
-            if (//권한이 없다면 SecurityException를 발생시킵니다
-                ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.READ_PHONE_NUMBERS
-                ) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.READ_PHONE_STATE
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                throw SecurityException("Permission Denial : requires android.permission.READ_PHONE_NUMBERS, android.permission.READ_PHONE_STATE")
-            } else { //권한이 있다면 getLine1Number()를 반환합니다 (null을 반환할 수 있습니다)
-                telephonyManager.line1Number
-            }
-        } else null
-
-        // SystemService 가 null이라면 null을 반환합니다
+    fun moveToVerifyFragment(){
+        val dataInterface = context as ReplaceFragmentToVerifyFragment
+        dataInterface.replaceFragmentToVerifyFragment()
     }
+
     fun phoneNumEditTextEraseButtonEvent(){
         binding.signUpPageClearButton.setOnClickListener {
             binding.signUpPhoneNumberEdittext.text.clear()
         }
+    }
+
+    fun registerWithPhoneNumberButtonEvent(){
+        val range = (1000 .. 9999)
+        val verificationNumber = range.random().toString()
+        binding.signPageNextButton.setOnClickListener {
+            moveToVerifyFragment()
+            try {
+                val smsManager: SmsManager = SmsManager.getDefault()
+                smsManager.sendTextMessage(myPhoneNumber, null, verificationNumber, null, null)
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
+
     }
 }

@@ -19,5 +19,9 @@
     <string name="email_tab_layout">EMAIL</string>
     <string name="phone_number_detail">you may receive SMS notifications from SungMin for security and login purposes.</string>
     <string name="next">Next</string>
+    <string name="input_verification_code">Enter the Confirmation Code We send to</string>
+    <string name="phone_number_change">Change phone number</string>
+    <string name="send_sms_again">resend SMS</string>
+    <string name="login_code">Login code</string>
 
 </resources>

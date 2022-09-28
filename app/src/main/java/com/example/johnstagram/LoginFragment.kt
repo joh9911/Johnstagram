@@ -26,6 +26,7 @@ class LoginFragment: Fragment() {
     ): View? {
         myBinding = LoginFragmentBinding.inflate(inflater,container,false)
         val view = binding.root
+        Log.d("로그인","하하")
         signUpEvent()
         signUpWithEmailAndPhoneNumberBtnEvent()
         passwordIconEvent()
@@ -74,7 +75,6 @@ class LoginFragment: Fragment() {
                 binding.loginPagePwEdittext.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 binding.loginPagePwEdittext.setSelection(binding.loginPagePwEdittext.length())
                 binding.loginPagePasswordIcon.setBackgroundResource(R.mipmap.show_password)
-                Log.d("비밀번호","품")
                 tag += 1
             }
             else{
@@ -82,8 +82,6 @@ class LoginFragment: Fragment() {
                 binding.loginPagePwEdittext.setSelection(binding.loginPagePwEdittext.length())
                 binding.loginPagePasswordIcon.setBackgroundResource(R.mipmap.hide_password)
                 tag -= 1
-                Log.d("비밀번호","잠금")
-
             }
         }
     }
