@@ -109,11 +109,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="@string/login"
-                    android:textColor="@color/white"
+                    android:textColor="@color/button_text_disabled_color"
                     android:layout_weight="0.4"
                     android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/facebook_color"
-                    android:background="@drawable/edittext_box_border"
+                    android:background="@drawable/disabled_button_box_border"
                     />
                 <LinearLayout
                     android:id="@+id/login_page_find_login_info_linear_layout"
@@ -193,8 +192,7 @@
                     android:textColor="@color/white"
                     android:text="@string/continue_as_facebook"
                     android:textAllCaps="false"
-                    android:backgroundTint="@color/facebook_color"
-                    android:background="@drawable/edittext_box_border"
+                    android:background="@drawable/button_box_border"
                     />
                 <TextView
                     android:id="@+id/login_page_signup_with_email_phoneNum"

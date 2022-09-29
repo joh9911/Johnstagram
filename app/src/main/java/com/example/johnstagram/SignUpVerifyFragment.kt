@@ -18,10 +18,7 @@ class SignUpVerifyFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         myBinding = SignupVerifyFragmentBinding.inflate(inflater,container,false)
-        Log.d("베리파이","하하")
         return binding.root
     }
-    fun setText(){
-        binding.explainVerificationTextView.setText(${})
-    }
+
 }

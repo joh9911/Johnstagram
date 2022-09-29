@@ -76,7 +76,8 @@
                         android:inputType="numberDecimal"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:textColorHint="@color/border_color" />
+                        android:textColorHint="@color/border_color"/>
+<!--                        android:maxLength="13"/>-->
 
                     <Button
                         android:id="@+id/sign_up_page_clear_button"
@@ -103,11 +104,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="@string/next"
-                    android:textColor="@color/white"
+                    android:textColor="@color/button_text_disabled_color"
                     android:layout_weight="0.4"
                     android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/facebook_color"
-                    android:background="@drawable/edittext_box_border"
+                    android:background="@drawable/disabled_button_box_border"
                     />
             </LinearLayout>
 

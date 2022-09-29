@@ -99,8 +99,7 @@
                     android:textColor="@color/white"
                     android:layout_weight="0.4"
                     android:layout_marginTop="15dp"
-                    android:backgroundTint="@color/facebook_color"
-                    android:background="@drawable/edittext_box_border"
+                    android:background="@drawable/disabled_button_box_border"
                     />
             </LinearLayout>
 

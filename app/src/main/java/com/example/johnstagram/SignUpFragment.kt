@@ -6,8 +6,11 @@ import android.content.Context.TELEPHONY_SERVICE
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.telephony.SmsManager
 import android.telephony.TelephonyManager
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +31,6 @@ import java.util.jar.Manifest
 class SignUpFragment: Fragment() {
     private var myBinding: SignupFragmentBinding? = null
     private val binding get() = myBinding!!
-    lateinit var myPhoneNumber: String
 
     companion object {
         private val PERMISSIONS = arrayOf(READ_SMS, READ_PHONE_NUMBERS, READ_PHONE_STATE, SEND_SMS,
@@ -42,8 +44,6 @@ class SignUpFragment: Fragment() {
     ): View? {
         myBinding = SignupFragmentBinding.inflate(inflater,container,false)
         val view = binding.root
-        Log.d("싸인업","하하")
-        myPhoneNumber = ""
         initEvent()
 
         return view
@@ -54,7 +54,7 @@ class SignUpFragment: Fragment() {
         setFocusOnEditText()
         tabLayoutEvent()
         returnToLoginFragmentEvent()
-        phoneNumEditTextEraseButtonEvent()
+        phoneNumEditTextEvent()
         registerWithPhoneNumberButtonEvent()
     }
 
@@ -78,14 +78,12 @@ class SignUpFragment: Fragment() {
                         binding.signUpPhoneNumberDetailTextview.visibility = View.VISIBLE
                         binding.signUpEmailEdittext.visibility = View.GONE
                         binding.signUpPhoneNumberEdittext.requestFocus()
-                        binding.signUpPhoneNumberEdittext.text.clear()
                     }
                     1 -> {
                         binding.signUpPhoneNumberDetailTextview.visibility = View.GONE
                         binding.signUpPhoneNumberEdittext.visibility = View.GONE
                         binding.signUpEmailEdittext.visibility = View.VISIBLE
                         binding.signUpEmailEdittext.requestFocus()
-                        binding.signUpEmailEdittext.text.clear()
                     }
                 }
             }
@@ -109,7 +107,7 @@ class SignUpFragment: Fragment() {
 
     fun getPhoneNumber(): String {
         var tm = requireContext().getSystemService(TELEPHONY_SERVICE) as TelephonyManager
-        myPhoneNumber = tm.line1Number
+        val myPhoneNumber = tm.line1Number
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 READ_SMS
@@ -146,10 +144,45 @@ class SignUpFragment: Fragment() {
             binding.signUpPhoneNumberEdittext.text.clear()
         }
     }
+    fun phoneNumEditTextEvent(){
+        binding.signPageNextButton.isEnabled = false
+        var lengthOfPhoneNumText = 0
+        var phoneNumText = ""
+        phoneNumEditTextEraseButtonEvent()
+
+        binding.signUpPhoneNumberEdittext.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                if(lengthOfPhoneNumText >= 1) {
+                    binding.signUpPageClearButton.visibility = View.VISIBLE
+                    binding.signPageNextButton.isEnabled = true
+                    binding.signPageNextButton.setBackgroundResource(R.drawable.button_box_border)
+                    binding.signPageNextButton.setTextColor(resources.getColor(R.color.white))
+                }
+                else{
+                    binding.signUpPageClearButton.visibility = View.GONE
+                    binding.signPageNextButton.isEnabled = false
+                    binding.signPageNextButton.setBackgroundResource(R.drawable.disabled_button_box_border)
+                    binding.signPageNextButton.setTextColor(resources.getColor(R.color.button_text_disabled_color))
+                }
+                if (phoneNumText == "010" && lengthOfPhoneNumText == 3)
+                    binding.signUpPhoneNumberEdittext.append("-")
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                lengthOfPhoneNumText = binding.signUpPhoneNumberEdittext.text.toString().length
+                phoneNumText = binding.signUpPhoneNumberEdittext.text.toString()
+            }
+        })
+        binding.signUpPhoneNumberEdittext.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+    }
 
     fun registerWithPhoneNumberButtonEvent(){
         val range = (1000 .. 9999)
         val verificationNumber = range.random().toString()
+        val myPhoneNumber = "1"
         binding.signPageNextButton.setOnClickListener {
             moveToVerifyFragment()
             try {
