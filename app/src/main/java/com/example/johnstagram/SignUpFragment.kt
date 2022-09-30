@@ -33,8 +33,8 @@ class SignUpFragment: Fragment() {
     private val binding get() = myBinding!!
 
     companion object {
-        private val PERMISSIONS = arrayOf(READ_SMS, READ_PHONE_NUMBERS, READ_PHONE_STATE, SEND_SMS,
-            RECEIVE_SMS)
+        private val PERMISSIONS = arrayOf(READ_SMS, READ_PHONE_NUMBERS, READ_PHONE_STATE, SEND_SMS
+            )
     }
 
     override fun onCreateView(
@@ -55,7 +55,6 @@ class SignUpFragment: Fragment() {
         tabLayoutEvent()
         returnToLoginFragmentEvent()
         phoneNumEditTextEvent()
-        registerWithPhoneNumberButtonEvent()
     }
 
     fun setFocusOnEditText(){
@@ -178,21 +177,20 @@ class SignUpFragment: Fragment() {
         })
         binding.signUpPhoneNumberEdittext.addTextChangedListener(PhoneNumberFormattingTextWatcher())
     }
-
-    fun registerWithPhoneNumberButtonEvent(){
-        val range = (1000 .. 9999)
-        val verificationNumber = range.random().toString()
-        val myPhoneNumber = "1"
-        binding.signPageNextButton.setOnClickListener {
-            moveToVerifyFragment()
-            try {
-                val smsManager: SmsManager = SmsManager.getDefault()
-                smsManager.sendTextMessage(myPhoneNumber, null, verificationNumber, null, null)
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
-                    .show()
-            }
-        }
-
+//** 스스로 문자보내는 함수
+//    fun registerWithPhoneNumberButtonEvent(){
+//        val range = (1000 .. 9999)
+//        val verificationNumber = range.random().toString()
+//        val myPhoneNumber = "1"
+//        binding.signPageNextButton.setOnClickListener {
+//            moveToVerifyFragment()
+//            try {
+//                val smsManager: SmsManager = SmsManager.getDefault()
+//                smsManager.sendTextMessage(myPhoneNumber, null, verificationNumber, null, null)
+//            } catch (e: Exception) {
+//                Toast.makeText(requireContext(), "Please enter all the data.."+e.message.toString(), Toast.LENGTH_LONG)
+//                    .show()
+//            }
+//        }
+//
     }
-}
