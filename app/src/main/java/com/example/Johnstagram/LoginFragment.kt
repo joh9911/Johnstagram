@@ -1,10 +1,8 @@
-package com.example.johnstagram
+package com.example.Johnstagram
 
-import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -12,10 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import com.example.johnstagram.databinding.LoginFragmentBinding
+import com.example.Johnstagram.databinding.LoginFragmentBinding
 
 
 class LoginFragment: Fragment() {

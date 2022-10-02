@@ -1,15 +1,8 @@
-package com.example.johnstagram
+package com.example.Johnstagram
 
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import com.example.johnstagram.databinding.ActivityMainBinding
-import kotlin.reflect.typeOf
+import com.example.Johnstagram.databinding.ActivityMainBinding
 
 interface ReplaceFragmentToSignupFragment {
     fun replaceFragmentToSignupFragment()
