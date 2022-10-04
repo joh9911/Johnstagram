@@ -22,6 +22,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.Johnstagram.databinding.SignupFragmentBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import java.util.concurrent.TimeUnit
 
 
 class SignUpFragment: Fragment() {
@@ -33,6 +38,7 @@ class SignUpFragment: Fragment() {
             READ_SMS, READ_PHONE_NUMBERS, READ_PHONE_STATE, SEND_SMS
         )
     }
+    val auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater,
