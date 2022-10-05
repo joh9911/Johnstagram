@@ -30,15 +30,15 @@ class LoginFragment: Fragment() {
         return view
     }
     fun initEvent(){
-        signUpEvent()
+        signUpButtonEvent()
         signUpWithEmailAndPhoneNumberBtnEvent()
         passwordIconEvent()
-        editTextEvent()
+        loginButtonActivatedEvent()
         loginButtonEvent()
     }
 
 
-    fun signUpEvent(){
+    fun signUpButtonEvent(){
         var tag = 0
         binding.loginPageSignupText.setOnClickListener {
             if (tag == 0){
@@ -104,7 +104,8 @@ class LoginFragment: Fragment() {
         }
     }
 
-    fun editTextEvent(){
+    fun loginButtonActivatedEvent(){
+        //텍스트 유무에 따른 로그인 버튼 활성화
         binding.loginPageLoginButton.isEnabled = false
         var lengthOfIdText = 0
         var lengthOfPwText = 0

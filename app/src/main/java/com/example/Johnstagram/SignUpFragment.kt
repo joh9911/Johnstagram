@@ -38,7 +38,6 @@ class SignUpFragment: Fragment() {
             READ_SMS, READ_PHONE_NUMBERS, READ_PHONE_STATE, SEND_SMS
         )
     }
-    val auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,7 +58,7 @@ class SignUpFragment: Fragment() {
         setFocusOnEditText()
         tabLayoutEvent()
         returnToLoginFragmentEvent()
-        phoneNumEditTextEvent()
+        nextButtonActivateEvent()
         registerWithPhoneNumberButtonEvent()
     }
 
@@ -157,10 +156,9 @@ class SignUpFragment: Fragment() {
         }
     }
 
-    fun phoneNumEditTextEvent() {
+    fun nextButtonActivateEvent() {
         binding.signPageNextButton.isEnabled = false
         var lengthOfPhoneNumText = 0
-        var phoneNumText = ""
         phoneNumEditTextEraseButtonEvent()
 
         binding.signUpPhoneNumberEdittext.addTextChangedListener(object : TextWatcher {
@@ -176,8 +174,7 @@ class SignUpFragment: Fragment() {
                     binding.signPageNextButton.setBackgroundResource(R.drawable.disabled_button_box_border)
                     binding.signPageNextButton.setTextColor(resources.getColor(R.color.button_text_disabled_color))
                 }
-                if (phoneNumText == "010" && lengthOfPhoneNumText == 3)
-                    binding.signUpPhoneNumberEdittext.append("-")
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -185,7 +182,6 @@ class SignUpFragment: Fragment() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 lengthOfPhoneNumText = binding.signUpPhoneNumberEdittext.text.toString().length
-                phoneNumText = binding.signUpPhoneNumberEdittext.text.toString()
             }
         })
         binding.signUpPhoneNumberEdittext.addTextChangedListener(PhoneNumberFormattingTextWatcher())
