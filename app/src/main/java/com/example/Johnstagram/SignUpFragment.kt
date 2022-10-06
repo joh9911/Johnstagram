@@ -22,6 +22,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.Johnstagram.databinding.SignupFragmentBinding
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -32,6 +34,8 @@ import java.util.concurrent.TimeUnit
 class SignUpFragment: Fragment() {
     private var myBinding: SignupFragmentBinding? = null
     private val binding get() = myBinding!!
+    val auth = Firebase.auth
+    var verificationId = ""
 
     companion object {
         private val PERMISSIONS = arrayOf(
@@ -191,6 +195,7 @@ class SignUpFragment: Fragment() {
         val range = (1000..9999)
         val verificationNumber = range.random().toString()
         val myPhoneNumber = "1"
+
         binding.signPageNextButton.setOnClickListener {
             moveToVerifyFragment()
             try {
@@ -205,6 +210,24 @@ class SignUpFragment: Fragment() {
                     .show()
             }
         }
-
     }
+
+    fun getAuthorized(){
+        val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) { }
+            override fun onVerificationFailed(e: FirebaseException) {
+            }
+            override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                this@SignUpFragment.verificationId = verificationId
+            }
+        }
+        val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber("+821012345678")
+            .setTimeout(60L, TimeUnit.SECONDS)
+            .setCallbacks(callbacks)
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
+        auth.setLanguageCode("kr")
+    }
+
 }
