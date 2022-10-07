@@ -10,6 +10,7 @@ import android.telephony.SmsManager
 import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,6 @@ class SignUpFragment: Fragment() {
         val view = binding.root
         initEvent()
         binding.signUpEmailEdittext.visibility = View.GONE
-
         return view
     }
 
@@ -192,42 +192,38 @@ class SignUpFragment: Fragment() {
     }
 
     fun registerWithPhoneNumberButtonEvent() {
-        val range = (1000..9999)
-        val verificationNumber = range.random().toString()
-        val myPhoneNumber = "1"
-
-        binding.signPageNextButton.setOnClickListener {
-            moveToVerifyFragment()
-            try {
-                val smsManager: SmsManager = SmsManager.getDefault()
-                smsManager.sendTextMessage(myPhoneNumber, null, verificationNumber, null, null)
-            } catch (e: Exception) {
-                Toast.makeText(
-                    requireContext(),
-                    "Please enter all the data.." + e.message.toString(),
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-            }
-        }
-    }
-
-    fun getAuthorized(){
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            override fun onVerificationCompleted(credential: PhoneAuthCredential) { }
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                Toast.makeText(requireContext(),"성공",Toast.LENGTH_SHORT).show()
+            }
             override fun onVerificationFailed(e: FirebaseException) {
+                Toast.makeText(requireContext(),"실패",Toast.LENGTH_SHORT).show()
             }
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 this@SignUpFragment.verificationId = verificationId
             }
         }
-        val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber("+821012345678")
-            .setTimeout(60L, TimeUnit.SECONDS)
-            .setCallbacks(callbacks)
-            .build()
-        PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
-        auth.setLanguageCode("kr")
+        binding.signPageNextButton.setOnClickListener {
+            var myPhoneNumber = binding.signUpPhoneNumberEdittext.text.toString()
+            if (myPhoneNumber.substring(0,2) == "01"){
+                myPhoneNumber = "+82${myPhoneNumber.substring(2,myPhoneNumber.length)}"
+            }
+            val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber(myPhoneNumber)
+                .setTimeout(60L, TimeUnit.SECONDS)
+                .setCallbacks(callbacks)
+                .build()
+            auth.setLanguageCode("kr")
+
+            PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
+//            moveToVerifyFragment()
+
+        }
+    }
+
+    fun getAuthorized(){
+
+
     }
 
 }
