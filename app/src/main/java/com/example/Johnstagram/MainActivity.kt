@@ -11,7 +11,7 @@ interface ReplaceFragmentToLoginFragment {
     fun replaceFragmentToLoginFragment()
 }
 interface ReplaceFragmentToVerifyFragment{
-    fun replaceFragmentToVerifyFragment()
+    fun replaceFragmentToVerifyFragment(myPhoneNumber: String)
 }
 
 class MainActivity : AppCompatActivity(),ReplaceFragmentToSignupFragment, ReplaceFragmentToLoginFragment, ReplaceFragmentToVerifyFragment {
@@ -45,8 +45,12 @@ class MainActivity : AppCompatActivity(),ReplaceFragmentToSignupFragment, Replac
 //        Toast.makeText(this,"mainOnDestroy",Toast.LENGTH_SHORT).show()
     }
 
-    override fun replaceFragmentToVerifyFragment() {
+    override fun replaceFragmentToVerifyFragment(myPhoneNumber: String) {
+        val myPhoneNumber = myPhoneNumber
+        val bundle = Bundle()
+        bundle.putString("myPhoneNumber",myPhoneNumber)
         val fragment = SignUpVerifyFragment()
+        fragment.arguments = bundle  // 이 4줄
         supportFragmentManager.beginTransaction().replace(R.id.main_page_frame_layout, fragment).commit()
     }
 

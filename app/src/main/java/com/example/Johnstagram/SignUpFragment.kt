@@ -149,9 +149,10 @@ class SignUpFragment: Fragment() {
         }
     }
 
-    fun moveToVerifyFragment() {
+    fun moveToVerifyFragment(myPhoneNumber: String) {
+        val myPhoneNumber = myPhoneNumber
         val dataInterface = context as ReplaceFragmentToVerifyFragment
-        dataInterface.replaceFragmentToVerifyFragment()
+        dataInterface.replaceFragmentToVerifyFragment(myPhoneNumber)
     }
 
     fun phoneNumEditTextEraseButtonEvent() {
@@ -216,7 +217,7 @@ class SignUpFragment: Fragment() {
             auth.setLanguageCode("kr")
 
             PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
-//            moveToVerifyFragment()
+            moveToVerifyFragment(myPhoneNumber)
 
         }
     }
