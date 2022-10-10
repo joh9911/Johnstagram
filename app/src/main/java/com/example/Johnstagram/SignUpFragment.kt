@@ -24,6 +24,8 @@ import androidx.fragment.app.Fragment
 import com.example.Johnstagram.databinding.SignupFragmentBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -195,10 +197,18 @@ class SignUpFragment: Fragment() {
     fun registerWithPhoneNumberButtonEvent() {
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                Toast.makeText(requireContext(),"성공",Toast.LENGTH_SHORT).show()
+                Log.d("성공","하하")
+
             }
             override fun onVerificationFailed(e: FirebaseException) {
-                Toast.makeText(requireContext(),"실패",Toast.LENGTH_SHORT).show()
+                Log.d("실패","하하")
+                if (e is FirebaseAuthInvalidCredentialsException) {
+                    Log.d("failedException","${e}")
+                    // Invalid request
+                } else if (e is FirebaseTooManyRequestsException) {
+                    Log.d("failedException","${e}")
+                    // The SMS quota for the project has been exceeded
+                }
             }
             override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                 this@SignUpFragment.verificationId = verificationId
@@ -207,12 +217,15 @@ class SignUpFragment: Fragment() {
         binding.signPageNextButton.setOnClickListener {
             var myPhoneNumber = binding.signUpPhoneNumberEdittext.text.toString()
             if (myPhoneNumber.substring(0,2) == "01"){
-                myPhoneNumber = "+82${myPhoneNumber.substring(2,myPhoneNumber.length)}"
+                myPhoneNumber = "+82${myPhoneNumber.substring(1,myPhoneNumber.length)}"
+                Log.d("myPhoneNumber","${myPhoneNumber}")
             }
+            Log.d("myPhoneNumber","${myPhoneNumber}")
             val optionsCompat =  PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(myPhoneNumber)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setCallbacks(callbacks)
+                .setActivity(requireActivity())
                 .build()
             auth.setLanguageCode("kr")
 
@@ -221,6 +234,7 @@ class SignUpFragment: Fragment() {
 
         }
     }
+
 
     fun getAuthorized(){
 
