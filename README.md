@@ -13,7 +13,6 @@
     <tr>
         <th>로그인 화면</th>
         <th>회원가입 화면</th>
-       
     </tr>
     <tr>
         <td valign="top">
@@ -22,6 +21,5 @@
         <td valign="top">
             <img src="https://user-images.githubusercontent.com/102031783/199229085-7c4208a0-a908-48e7-830d-b3d5f669ebd9.gif"  width="100%"/>
         </td>
-
     </tr>
 </table>
