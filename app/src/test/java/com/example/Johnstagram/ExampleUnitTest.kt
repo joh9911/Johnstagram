@@ -1,4 +1,4 @@
-package com.example.johnstagram
+package com.example.Johnstagram
 
 import org.junit.Test
 

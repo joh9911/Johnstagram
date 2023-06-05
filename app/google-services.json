@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "135386256628",
+    "project_id": "johnstagram-4d2ac",
+    "storage_bucket": "johnstagram-4d2ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135386256628:android:b2a452e6f66702ffc97aa1",
+        "android_client_info": {
+          "package_name": "com.example.Johnstagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135386256628-kkpts6j00kckui2ijvg0pahogvd62hht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiBtZKVl0DJFA2_YNsKtaCPl4WzKiF3mg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135386256628-kkpts6j00kckui2ijvg0pahogvd62hht.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

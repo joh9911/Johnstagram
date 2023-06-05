@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Johnstagram</string>
+    <string name="login">로그인</string>
+    <string name="login_detail">로그인 상세 정보를 잊으셨나요?</string>
+    <string name="login_help">로그인 도움말 보기.</string>
+    <string name="continue_as_facebook">페이스북으로 계속</string>
+    <string name="no_account">계정이 없으신가요?</string>
+    <string name="signup">가입하기.</string>
+    <string name="account_already_have">이미 계정이 있으신가요?</string>
+    <string name="account_already_have_login">로그인하기</string>
+    <string name="or">또는</string>
+    <string name="signup_with_email_phone_num">이메일 주소 또는 전화번호로 가입하기</string>
+    <string name="id">전화번호, 이메일 주소 또는 사용자 이름</string>
+    <string name="password">비밀번호</string>
+    <string name="phone_number">휴대폰</string>
+    <string name="email">이메일</string>
+    <string name="phone_number_tab_layout">전화번호</string>
+    <string name="email_tab_layout">이메일</string>
+    <string name="phone_number_detail">보안 및 로그인 목적으로 조성민이 보내는 SMS 알림을 수신할 수 있습니다.</string>
+    <string name="next">다음</string>
+    <string name="input_verification_code">번으로 전송된 인증 코드를 입력하세요.</string>
+    <string name="phone_number_change">전화번호 변경</string>
+    <string name="send_sms_again">SMS 재전송</string>
+    <string name="login_code">로그인 코드</string>
+
 </resources>

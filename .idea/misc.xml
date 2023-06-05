@@ -3,9 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/bottom_border.xml" value="0.1225" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/box_border.xml" value="0.1235" />
         <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/box_bordor.xml" value="0.1295" />
-        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/login_page.xml" value="0.25" />
-        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/signup_page.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/button_box_border.xml" value="0.1225" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/disabled_button_box_border.xml" value="0.1225" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/edittext_box_border.xml" value="0.1235" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/drawable/tab_underline.xml" value="0.1225" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/login_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/login_page.xml" value="0.2" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/signup_fragment.xml" value="0.176" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/signup_page.xml" value="0.2" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/signup_varify_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/signup_verify_fragment.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/joh9911/Desktop/joh9911/stageus/Johnstagram/app/src/main/res/layout/test_fragment.xml" value="0.2754182754182754" />
       </map>
     </option>
   </component>

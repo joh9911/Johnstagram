@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Johnstagram</string>
+    <string name="login">Log in</string>
+    <string name="login_detail">Forgot your login details?</string>
+    <string name="login_help">Get help logging in.</string>
+    <string name="continue_as_facebook">Continue as Facebook</string>
+    <string name="no_account">Dont have an account?</string>
+    <string name="signup">Sign up.</string>
+    <string name="account_already_have">Already have and account?</string>
+    <string name="account_already_have_login">Log in</string>
+    <string name="or">OR</string>
+    <string name="signup_with_email_phone_num">Sign up with email or phone number</string>
+    <string name="id">Phone number, email or username</string>
+    <string name="password">Password</string>
+    <string name="phone_number">Phone</string>
+    <string name="email">Email</string>
+    <string name="phone_number_tab_layout">PHONE</string>
+    <string name="email_tab_layout">EMAIL</string>
+    <string name="phone_number_detail">you may receive SMS notifications from SungMin for security and login purposes.</string>
+    <string name="next">Next</string>
+    <string name="input_verification_code">Enter the Confirmation Code We send to</string>
+    <string name="phone_number_change">Change phone number</string>
+    <string name="send_sms_again">resend SMS</string>
+    <string name="login_code">Login code</string>
+
+</resources>
